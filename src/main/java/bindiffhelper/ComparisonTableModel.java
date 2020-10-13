@@ -9,7 +9,12 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.Symbol;
 
 public class ComparisonTableModel extends AbstractTableModel {
-    private String[] columnNames = {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String[] columnNames = {
     		"Import",
     		"Address this file",
     		"Name this file",
@@ -17,6 +22,7 @@ public class ComparisonTableModel extends AbstractTableModel {
     		"Address other file",
     		"Name other file",
     		"Similarity",
+    		"Confidence",
     		"Algorithm"
     };
     
@@ -54,20 +60,28 @@ public class ComparisonTableModel extends AbstractTableModel {
     	case 0:
     		return e.do_import;
     	case 1:
-    		return "0x" + Long.toHexString(e.primaryAddress.getUnsignedOffset());
+    		if(e.primaryAddress != null)
+    			return "0x" + Long.toHexString(e.primaryAddress.getUnsignedOffset());
+    		return "";
     	case 2:
     		if (e.primaryFunctionSymbol != null)
     			return e.primaryFunctionSymbol.getName();
     		return "No Symbol";
     	case 3:
-    		return e.primaryFunctionNameDb;
+    		if(e.primaryFunctionNameDb != null)
+    			return e.primaryFunctionNameDb;
+    		return "";
     	case 4:
     		return "0x" + Long.toHexString(e.secondaryAddress);
     	case 5:
-    		return e.secondaryFunctionName;
+    		if(e.secondaryFunctionName != null)
+    			return e.secondaryFunctionName;
+    		return "";
     	case 6:
     		return e.similarity;    	
     	case 7:
+    		return e.confidence;    	
+    	case 8:
     		return e.algorithm;
     	}
     	
@@ -113,9 +127,10 @@ public class ComparisonTableModel extends AbstractTableModel {
     	final long secondaryAddress;
     	final String secondaryFunctionName;
     	final double similarity;
+    	final double confidence;
     	final String algorithm;
     	
-    	public Entry(boolean i, Address pa, String pfn, Symbol pfs, long sa, String sfn, double sim, String alg)
+    	public Entry(boolean i, Address pa, String pfn, Symbol pfs, long sa, String sfn, double sim, double con, String alg)
     	{
     		do_import = i;
     		primaryAddress = pa;
@@ -124,6 +139,7 @@ public class ComparisonTableModel extends AbstractTableModel {
     		secondaryAddress = sa;
     		secondaryFunctionName = sfn;
     		similarity = sim;
+    		confidence = con;
     		algorithm = alg;
     	}
     	
