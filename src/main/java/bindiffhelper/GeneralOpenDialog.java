@@ -98,10 +98,10 @@ public class GeneralOpenDialog extends DialogComponentProvider {
 		if (!extBDFilePanel.getFileName().isEmpty()) {
 			plugin.provider.openBinDiffDB(extBDFilePanel.getFileName());
 		}
-		else if (!extBEFilePanel.getFileName().isEmpty()) {
-			//
+		/*else if (!extBEFilePanel.getFileName().isEmpty()) {
+		
 			
-		}
+		}*/
 		else if (tp != null && tp.getSelectedItemCount() == 1) {
 			if (tp.getSelectedDomainFolder() != null) {
 				Msg.showError(this, getComponent(), "Error", 
@@ -118,7 +118,9 @@ public class GeneralOpenDialog extends DialogComponentProvider {
 			
 			var files = plugin.callBinDiff(df);
 			
-			plugin.provider.openBinDiffDB(files[2].getAbsolutePath(), files[0], files[1]);
+			if (files != null) {
+				plugin.provider.openBinDiffDB(files[2].getAbsolutePath(), files[0], files[1]);
+			}
 		}
 		else {
 			Msg.showError(this, getComponent(), "Error", "No valid selection");

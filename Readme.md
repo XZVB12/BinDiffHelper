@@ -3,6 +3,8 @@
 Ghidra extension that uses BinDiff on your Ghidra project to find matching functions and rename them automatically (BinDiff 6 supported).
 Check out the [BinDiff manual](https://www.zynamics.com/bindiff/manual/) to see how it works and how it matches functions / basic blocks. However, with this extension, BinDiff is automated from within Ghidra, so you don't have to diff your binaries yourself.
 
+**Please report bugs via the issue feature on github**
+
 ## What it does / Changelog
 
 ### v0.1
@@ -18,6 +20,13 @@ Check out the [BinDiff manual](https://www.zynamics.com/bindiff/manual/) to see 
 * Add comments to matched functions in the listing linking to the other binary
 * Fixed a bug where protobuf library was missing in some builds
 * New file load menu
+
+### v0.3.1
+* Fixed a crash when opening a file via the "from project" option
+
+### v0.3.2
+* Fixed a bug where diffing with a different file from same project didn't work
+* Fixed a bug where files with short names (< 3 characters>) could not be diffed
 
 ### Next releases
 * Import function names and function parameters (type and name)
